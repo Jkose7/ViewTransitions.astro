@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { Albums } from "../data/albums"
+
+const { album } = Astro.params
+const currentAlbum = Albums.find(a => a.id === album)
+
+if(!currentAlbum){
+    return Astro.redirect('/404')
+}
+---
+
+<Layout title={currentAlbum.id}>
+    <h1 class="text-9xl text-white">{currentAlbum.title}</h1>
+</Layout>
