@@ -13,7 +13,7 @@ export const Albums = [
     {
         id: "el-jardin-de-los-presentes",
         title: "El Jardin De los Presentes",
-        img: "https://jazzrocksoul.com/wp-content/uploads/2018/01/Invisible-El-Jard%C3%ADn-de-los-Presentes.jpg",
+        img: "https://upload.wikimedia.org/wikipedia/en/2/20/El_jard%C3%ADn_de_los_presentes.jpg",
         artist: "Invisible",
         genre: "Progressive rock | art rock | jazz rock",
         realese: "29 September 1976",

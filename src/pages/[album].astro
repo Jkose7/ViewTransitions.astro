@@ -6,7 +6,6 @@ import AlbumTrackList from "../components/AlbumTrackList.astro";
 
 const { album } = Astro.params;
 const info = Albums.find((a) => a.id === album);
-const albumTracks = Tracks.find((t) => t.album === album)?.tracks || [];
 
 if (!info) {
     return Astro.redirect("/404");
@@ -18,10 +17,12 @@ if (!info) {
         class="m-auto flex flex-col items-center justify-center max-w-5xl min-h-screen gap-5"
     >
         <div
-            class="bg-card hover:invert hover:shadow-xl min-h-[800px] hover:scale-[1.03] transition-all shadow-md shadow-white p-8 flex flex-col max-w-md rounded-md gap-3"
+            transition:name={`album-div-${info.id}`}
+            class="bg-card transition-all min-h-[800px] shadow-md shadow-white p-8 flex flex-col max-w-md rounded-md gap-3"
         >
             <div class="w-full min-h-full transition-all">
                 <img
+                    transition:name={`album-image-${info.id}`}
                     class="aspect-auto object-cover h-96 w-full transition-all"
                     src={info.img}
                     alt={`Album ${info.title}`}

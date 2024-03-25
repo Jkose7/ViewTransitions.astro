@@ -12,5 +12,12 @@ const { id, title, img } = Astro.props;
     class="hover:scale-105 hover:invert hover:shadow-2xl inline-block transition-all w-full"
     href={`/${id}`}
 >
-    <img class="aspect-auto object-cover w-full" src={img} alt={`Album ${title}`} />
+    <div transition:name={`album-div-${id}`} class="bg-card h-full flex flex-col">
+        <img
+            transition:name={`album-image-${id}`}
+            class="aspect-auto object-cover w-full"
+            src={img}
+            alt={`Album ${title}`}
+        />
+    </div>
 </a>
