@@ -1,15 +1,62 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import { Albums } from "../data/albums"
+import Layout from "../layouts/Layout.astro";
+import { Albums } from "../data/albums";
+import { Tracks } from "../data/tracks";
+import AlbumTrackList from "../components/AlbumTrackList.astro";
 
-const { album } = Astro.params
-const currentAlbum = Albums.find(a => a.id === album)
+const { album } = Astro.params;
+const info = Albums.find((a) => a.id === album);
+const albumTracks = Tracks.find((t) => t.album === album)?.tracks || [];
 
-if(!currentAlbum){
-    return Astro.redirect('/404')
+if (!info) {
+    return Astro.redirect("/404");
 }
 ---
 
-<Layout title={currentAlbum.id}>
-    <h1 class="text-9xl text-white">{currentAlbum.title}</h1>
+<Layout title={info.title}>
+    <main
+        class="m-auto flex flex-col items-center justify-center max-w-5xl min-h-screen gap-5"
+    >
+        <div
+            class="bg-card hover:invert hover:shadow-xl min-h-[800px] hover:scale-[1.03] transition-all shadow-md shadow-white p-8 flex flex-col max-w-md rounded-md gap-3"
+        >
+            <div class="w-full min-h-full transition-all">
+                <img
+                    class="aspect-auto object-cover h-96 w-full transition-all"
+                    src={info.img}
+                    alt={`Album ${info.title}`}
+                />
+            </div>
+
+            <div class="relative w-full min-h-80 flex flex-col">
+
+                <div class="w-full flex">
+                    <AlbumTrackList album={album} />
+
+                    <div class="w-full flex flex-col">
+                        <div class="text-right font-semibold flex flex-col">
+                            <small>{info.genre}</small>
+                            <small>Produce by {info.producer}</small>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="mt-auto flex flex-row justify-between w-full h-full">
+                    <div class="self-end flex flex-col font-semibold w-full">
+                        <small>{info.duration} / {info.realese}</small>
+                        <small class="">RELEASED BY {info.studio}</small>
+                    </div>
+
+                    <div class="w-full text-right">
+                        <h1 class="text-xl font-semibold">{info.artist}</h1>
+                        <h1 class="text-2xl text-balance font-bold uppercase">
+                            {info.title}
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
 </Layout>

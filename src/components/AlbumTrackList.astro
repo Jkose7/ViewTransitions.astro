@@ -1,0 +1,20 @@
+---
+export interface Props {
+    album: string
+}
+
+const { album } = Astro.props
+import { Tracks } from "../data/tracks";
+
+const albumTracks = Tracks.find((t) => t.album === album)?.tracks || [];
+---
+
+<div class="w-full">
+    {
+        albumTracks.map((song, index) => (
+            <p class="block font-semibold text-sm">
+                {index + 1}. {song}
+            </p>
+        ))
+    }
+</div>
